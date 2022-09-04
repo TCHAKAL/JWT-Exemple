@@ -15,9 +15,12 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    public long saveUserDto(UserDto userDto){
+    public User saveUserDto(UserDto userDto){
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        return userRepository.save(UserDto.toEntity(userDto)).getId();
+        return userRepository.save(UserDto.toEntity(userDto));
     }
 
+    public User findByUsername(String username){
+        return this.userRepository.findByUsername(username);
+    }
 }

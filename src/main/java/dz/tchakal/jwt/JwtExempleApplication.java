@@ -12,7 +12,6 @@ public class JwtExempleApplication {
         SpringApplication.run(JwtExempleApplication.class, args);
     }
 
-
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
