@@ -1,13 +1,14 @@
 package dz.tchakal.jwt.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import dz.tchakal.jwt.model.User;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Data
 public class UserDto {
+
     private String username;
 
     private String password;
@@ -17,4 +18,23 @@ public class UserDto {
     private String lastName;
 
     private String email;
+
+    public static UserDto fromEntity(User user){
+        return UserDto.builder()
+                .username(user.getUsername())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .build();
+    }
+    public static User toEntity(UserDto userDto){
+        return User.builder()
+                .username(userDto.getUsername())
+                .password(userDto.getPassword())
+                .email(userDto.getEmail())
+                .firstName(userDto.getFirstName())
+                .lastName(userDto.getLastName())
+                .build();
+    }
 }

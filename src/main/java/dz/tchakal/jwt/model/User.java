@@ -1,11 +1,12 @@
 package dz.tchakal.jwt.model;
 
+import dz.tchakal.jwt.dto.UserDto;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 
@@ -13,7 +14,13 @@ import java.io.Serializable;
 @DiscriminatorValue("User")
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
+@Data
 public class User implements Serializable {
+
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
+    private long id;
 
     @Column(name = "username",nullable = false,unique = true)
     private String username;
