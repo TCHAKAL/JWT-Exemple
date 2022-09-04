@@ -1,5 +1,6 @@
 package dz.tchakal.jwt.service;
 
+import dz.tchakal.jwt.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -19,7 +20,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //Charger l'utilisateur par son nom
-        dz.tchakal.jwt.model.User user = userService.findByUsername(username);
+        UserDto user = userService.findByUsername(username);
         //Charger la liste des privileges
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
 

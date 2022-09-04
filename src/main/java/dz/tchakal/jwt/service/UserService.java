@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class UserService {
 
@@ -15,12 +18,18 @@ public class UserService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    public User saveUserDto(UserDto userDto){
+    public UserDto saveUserDto(UserDto userDto){
         userDto.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
-        return userRepository.save(UserDto.toEntity(userDto));
+        return UserDto.fromEntity(userRepository.save(UserDto.toEntity(userDto)));
     }
 
-    public User findByUsername(String username){
-        return this.userRepository.findByUsername(username);
+    public UserDto findByUsername(String username){
+        return UserDto.fromEntity(this.userRepository.findByUsername(username));
+    }
+
+    public List<UserDto> findAll() {
+       return this.userRepository.findAll().stream()
+               .map(user -> UserDto.fromEntity(user))
+               .collect(Collectors.toList());
     }
 }

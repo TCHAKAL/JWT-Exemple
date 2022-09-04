@@ -10,17 +10,17 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.io.Serializable;
 
-@Table(name = "User")
-@DiscriminatorValue("User")
+@Table(name = "utilisateur")
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
+@Entity
 public class User implements Serializable {
-
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private long id;
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @Column(name = "username",nullable = false,unique = true)
     private String username;
@@ -37,5 +37,6 @@ public class User implements Serializable {
     @Email
     @Column(name = "email",nullable = false,unique = true)
     private String email;
+
 
 }
